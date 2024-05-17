@@ -333,7 +333,9 @@ async function createFromTemplate({
       loader.succeed('Dependencies installation skipped');
     }
   } catch (e) {
-    if (e instanceof Error) {
+    if (e instanceof CLIError) {
+      logger.error(e.message);
+    } else if (e instanceof Error) {
       logger.error(
         'Installing pods failed. This doesn\'t affect project initialization and you can safely proceed. \nHowever, you will need to install pods manually when running iOS, follow additional steps in "Run instructions for iOS" section.\n',
       );
